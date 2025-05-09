@@ -1,20 +1,24 @@
-/* App Container Styles */
+/* Modern App Container Styles */
 .App {
   min-height: 100vh;
-  background-color: #f5f5f5;
+  background: linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%);
+  font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
 }
 
 .App-header {
-  background-color: #282c34;
-  padding: 1rem;
+  background: linear-gradient(to right, #2c3e50, #3498db);
+  padding: 1.5rem;
   color: white;
   text-align: center;
   margin-bottom: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .App-header h1 {
   margin: 0;
-  font-size: 2rem;
+  font-size: 2.5rem;
+  font-weight: 600;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 main {
@@ -23,53 +27,212 @@ main {
   padding: 0 20px;
 }
 
-/* Internship List Styles */
+/* Enhanced Internship List Styles */
 .internship-list {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 25px;
   padding: 20px;
+  animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .internship-card {
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 20px;
+  border: none;
+  border-radius: 12px;
+  padding: 25px;
   background: white;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  transition: transform 0.2s;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
 }
 
 .internship-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.internship-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(to right, #3498db, #2ecc71);
 }
 
 .internship-card h3 {
-  margin: 0 0 10px;
-  color: #333;
+  margin: 0 0 15px;
+  color: #2c3e50;
+  font-size: 1.4rem;
+  font-weight: 600;
 }
 
 .role, .duration {
-  margin: 5px 0;
+  margin: 8px 0;
   color: #666;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
 }
 
+.role::before, .duration::before {
+  content: '•';
+  margin-right: 8px;
+  color: #3498db;
+}
+
+/* Enhanced Button Styles */
 .favorite-btn {
   background: none;
   border: none;
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   cursor: pointer;
-  padding: 5px;
-  margin-top: 10px;
+  padding: 8px;
+  margin-top: 15px;
+  transition: transform 0.3s ease;
+  position: absolute;
+  right: 20px;
+  top: 20px;
 }
 
-/* State Styles */
-.loading, .error {
+.favorite-btn:hover {
+  transform: scale(1.2);
+}
+
+.nav-btn {
+  background: linear-gradient(to right, #3498db, #2ecc71);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1rem;
+  margin-top: 15px;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.nav-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(to right, #2ecc71, #3498db);
+}
+
+/* Enhanced Header Styles */
+.list-header, .favorites-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  margin-bottom: 30px;
+}
+
+.list-header h2, .favorites-header h2 {
+  font-size: 2rem;
+  color: #2c3e50;
+  font-weight: 600;
+  margin: 0;
+}
+
+/* Status Indicators */
+.loading, .error, .no-data {
   text-align: center;
-  padding: 20px;
+  padding: 40px;
   font-size: 1.2rem;
+  border-radius: 12px;
+  margin: 20px;
+  background: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.loading {
+  color: #3498db;
+  animation: pulse 1.5s infinite;
 }
 
 .error {
-  color: #dc3545;
+  color: #e74c3c;
+  background: #fee;
+}
+
+.no-data {
+  color: #7f8c8d;
+}
+
+@keyframes pulse {
+  0% { opacity: 0.6; }
+  50% { opacity: 1; }
+  100% { opacity: 0.6; }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .internship-list {
+    grid-template-columns: 1fr;
+  }
+
+  .App-header h1 {
+    font-size: 2rem;
+  }
+
+  .list-header, .favorites-header {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+  }
+
+  .nav-btn {
+    width: 100%;
+    max-width: 300px;
+  }
+}
+/* ...existing styles... */
+
+.back-btn {
+  background: linear-gradient(to right, #e74c3c, #c0392b);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.back-btn::before {
+  content: '←';
+  font-size: 1.2rem;
+}
+
+.back-btn:hover {
+  transform: translateX(-5px);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(to right, #c0392b, #e74c3c);
+}
+
+/* Responsive styles for back button */
+@media (max-width: 768px) {
+  .back-btn {
+    width: 100%;
+    max-width: 300px;
+    justify-content: center;
+    margin: 0 auto;
+  }
 }
